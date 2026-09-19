@@ -45,11 +45,13 @@
 
   * { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html, body { height: 100%; }
 
   body {
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     background: linear-gradient(150deg, var(--grad-start) 0%, var(--grad-mid) 45%, var(--grad-end) 100%);
     color: var(--white);
     font-family: var(--font);
@@ -68,7 +70,8 @@
     max-width: 1120px;
     width: 100%;
     margin: 0 auto;
-    padding: 56px 24px 40px;
+    padding: clamp(12px, 2vh, 28px) 24px clamp(10px, 1.5vh, 20px);
+    min-height: 0;
   }
 
   /* ---------- Hero ---------- */
@@ -78,36 +81,41 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    min-height: 0;
   }
 
   .logo {
-    height: 44px;
+    height: clamp(22px, 3.2vh, 36px);
     width: auto;
     display: block;
+    flex-shrink: 0;
   }
 
   h1.headline {
     font-weight: 800;
     letter-spacing: -0.01em;
-    font-size: clamp(34px, 5.6vw, 56px);
+    font-size: clamp(20px, 3.6vh, 44px);
     line-height: 1.08;
     max-width: 15ch;
-    margin: 28px 0 0;
+    margin: clamp(8px, 1.2vh, 16px) 0 0;
+    flex-shrink: 0;
   }
 
   .sub {
-    margin: 22px 0 0;
-    font-size: 17px;
+    margin: clamp(6px, 1vh, 10px) 0 0;
+    font-size: clamp(12px, 1.5vh, 15px);
     color: rgba(255, 255, 255, 0.88);
     max-width: 46ch;
-    line-height: 1.5;
+    line-height: 1.4;
+    flex-shrink: 0;
   }
 
   /* ---------- Waitlist pill form ---------- */
   .waitlist {
-    margin-top: 30px;
+    margin-top: clamp(8px, 1.4vh, 14px);
     width: 100%;
     max-width: 460px;
+    flex-shrink: 0;
   }
 
   .waitlist-form {
@@ -185,23 +193,29 @@
 
   /* ---------- Hero phones image ---------- */
   .hero-visual {
-    margin-top: 8px;
+    margin-top: clamp(4px, 1vh, 8px);
     width: 100%;
+    flex: 1;
+    min-height: 0;
     display: flex;
+    align-items: flex-end;
     justify-content: center;
+    overflow: hidden;
   }
 
   .hero-phones {
-    width: 100%;
-    max-width: 860px;
+    width: auto;
     height: auto;
+    max-width: min(920px, 94%);
+    max-height: 100%;
     display: block;
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.35));
   }
 
   /* ---------- Footer ---------- */
   footer {
-    padding-top: 24px;
+    padding-top: clamp(6px, 1vh, 14px);
+    flex-shrink: 0;
   }
 
   .footer-links {
@@ -221,8 +235,6 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 640px) {
-    .page { padding: 40px 20px 28px; }
-    .logo { height: 34px; }
     .waitlist-form {
       flex-direction: column;
       align-items: stretch;
@@ -243,7 +255,9 @@
 
 <div class="page">
   <section class="hero">
-    <img class="logo" src="images/logo.svg" alt="blurt">
+    <a href="index.html" aria-label="Blurt — inicio" style="flex-shrink:0;">
+      <img class="logo" src="images/logo.svg" alt="blurt">
+    </a>
 
     <h1 class="headline">El momento diario del internet. 👀</h1>
 
@@ -273,9 +287,9 @@
 
   <footer>
     <div class="footer-links">
-      <a href="#">Contacto</a>
-      <a href="#">Términos</a>
-      <a href="#">Privacidad</a>
+      <a href="mailto:blurt.today@gmail.com">Contacto</a>
+      <a href="terms.html">Términos</a>
+      <a href="privacy.html">Privacidad</a>
     </div>
     <div class="footer-copy">© 2026 Blurt • todos los derechos reservados</div>
   </footer>
