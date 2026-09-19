@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blurt — El momento diario del internet</title>
+<meta name="description" content="Todos reciben la misma pregunta todos los días. Responde primero. Luego ve la de todos los demás.">
+
+<!--
+  ============================================================
+  ANTES DE PUBLICAR — 3 pasos:
+
+  1) Corre el SQL de waitlist-setup.sql en tu SQL editor de Supabase
+     (crea la tabla + política RLS de insert-only para el anon key).
+
+  2) Reemplaza estas dos constantes en el <script> al final del archivo:
+       const SUPABASE_URL = "TU_SUPABASE_URL_AQUI";
+       const SUPABASE_ANON_KEY = "TU_SUPABASE_ANON_KEY_AQUI";
+
+  3) Deploy a Vercel:
+       - Sube esta carpeta completa (index.html + /images) a un repo de GitHub
+         y conéctalo en vercel.com/new, o
+       - Con Vercel CLI: desde esta carpeta corre `vercel` (o `vercel --prod`)
+       No hace falta vercel.json: es un sitio estático simple.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --grad-start: #f0748f;
+    --grad-mid: #ec5a72;
+    --grad-end: #d6302e;
+    --white: #ffffff;
+    --pill-bg: rgba(255, 255, 255, 0.16);
+    --pill-border: rgba(255, 255, 255, 0.28);
+    /* SF Compact Rounded is an Apple system font with no licensed web build:
+       Safari/macOS/iOS visitors get the real thing via ui-rounded/-apple-system;
+       everyone else falls back to Baloo 2, a similarly rounded, web-licensed face. */
+    --font: ui-rounded, -apple-system, "SF Pro Rounded", "Baloo 2", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(150deg, var(--grad-start) 0%, var(--grad-mid) 45%, var(--grad-end) 100%);
+    color: var(--white);
+    font-family: var(--font);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a { color: inherit; }
+
+  .page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+
+  h1.headline {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: clamp(34px, 5.6vw, 56px);
+    line-height: 1.08;
+    max-width: 15ch;
+    margin: 28px 0 0;
+  }
+
+  .sub {
+    margin: 22px 0 0;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 46ch;
+    line-height: 1.5;
+  }
+
+  /* ---------- Waitlist pill form ---------- */
+  .waitlist {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 460px;
+  }
+
+  .waitlist-form {
+    display: flex;
+    align-items: center;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    padding: 6px 6px 6px 22px;
+    backdrop-filter: blur(6px);
+  }
+
+  .waitlist-form input[type="email"] {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 8px;
+    outline: none;
+  }
+
+  .waitlist-form input[type="email"]::placeholder { color: rgba(255, 255, 255, 0.75); }
+
+  .btn {
+    background: var(--white);
+    color: #1a1015;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.1s ease, opacity 0.15s ease;
+  }
+
+  .btn:hover { opacity: 0.92; }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.65; cursor: default; }
+  .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+  .waitlist-form input[type="email"]:focus-visible {
+    outline: none;
+  }
+
+  .form-note {
+    margin: 10px 4px 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    min-height: 18px;
+    text-align: left;
+  }
+
+  .form-note.error { color: #ffe0dd; font-weight: 600; }
+  .form-note.success { color: #e4ffe9; font-weight: 600; }
+
+  .waitlist-success {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    padding: 14px 22px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .waitlist-success.show { display: flex; }
+  .waitlist-form.hide { display: none; }
+
+  /* ---------- Hero phones image ---------- */
+  .hero-visual {
+    margin-top: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-phones {
+    width: 100%;
+    max-width: 860px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.35));
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding-top: 24px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+  }
+
+  .footer-links a { text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+
+  .footer-copy {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    .page { padding: 40px 20px 28px; }
+    .logo { height: 34px; }
+    .waitlist-form {
+      flex-direction: column;
+      align-items: stretch;
+      border-radius: 22px;
+      padding: 14px;
+      gap: 10px;
+    }
+    .waitlist-form input[type="email"] { padding: 8px 6px; }
+    .btn { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <section class="hero">
+    <img class="logo" src="images/logo.svg" alt="blurt">
+
+    <h1 class="headline">El momento diario del internet. 👀</h1>
+
+    <p class="sub">Todos reciben la misma pregunta todos los días. Responde primero. Luego ve la de todos los demás.</p>
+
+    <div class="waitlist">
+      <form class="waitlist-form" id="waitlistForm" novalidate>
+        <label for="email" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" autocomplete="email" required>
+        <button type="submit" class="btn" id="submitBtn">Unirme</button>
+      </form>
+      <div class="waitlist-success" id="waitlistSuccess">
+        <span>✓</span>
+        <span>Listo. Te avisamos cuando abramos tu acceso.</span>
+      </div>
+      <p class="form-note" id="formNote"></p>
+    </div>
+
+    <div class="hero-visual">
+      <img
+        class="hero-phones"
+        src="images/hero-phones.png"
+        alt="Dos teléfonos mostrando la pregunta de hoy en Blurt, con reacciones, comentarios y compartir"
+      >
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Contacto</a>
+      <a href="#">Términos</a>
+      <a href="#">Privacidad</a>
+    </div>
+    <div class="footer-copy">© 2026 Blurt • todos los derechos reservados</div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+  // ---- Supabase waitlist ----
+  // TODO: reemplaza con tus valores reales de Supabase (Project Settings > API)
+  const SUPABASE_URL = "TU_SUPABASE_URL_AQUI";
+  const SUPABASE_ANON_KEY = "TU_SUPABASE_ANON_KEY_AQUI";
+
+  const supabaseClient = (SUPABASE_URL.startsWith("http"))
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+  const form = document.getElementById('waitlistForm');
+  const emailInput = document.getElementById('email');
+  const submitBtn = document.getElementById('submitBtn');
+  const note = document.getElementById('formNote');
+  const successBox = document.getElementById('waitlistSuccess');
+
+  function setNote(msg, kind) {
+    note.textContent = msg || '';
+    note.className = 'form-note' + (kind ? ' ' + kind : '');
+  }
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+
+    if (!isValidEmail(email)) {
+      setNote('Escribe un correo válido.', 'error');
+      emailInput.focus();
+      return;
+    }
+
+    if (!supabaseClient) {
+      setNote('Falta configurar Supabase en este archivo (SUPABASE_URL / SUPABASE_ANON_KEY).', 'error');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+    setNote('');
+
+    try {
+      const { error } = await supabaseClient.from('waitlist').insert({ email: email });
+
+      if (error) {
+        if (error.code === '23505') {
+          setNote('Ese correo ya está en la lista.', 'success');
+        } else {
+          console.error(error);
+          setNote('Algo falló. Intenta de nuevo en un momento.', 'error');
+        }
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Unirme';
+        return;
+      }
+
+      form.classList.add('hide');
+      successBox.classList.add('show');
+      setNote('');
+    } catch (err) {
+      console.error(err);
+      setNote('Algo falló. Intenta de nuevo en un momento.', 'error');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Unirme';
+    }
+  });
+</script>
+
+</body>
+</html>
