@@ -25,6 +25,10 @@
   ============================================================
 -->
 
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="images/favicon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -304,6 +308,7 @@
   // TODO: reemplaza con tus valores reales de Supabase (Project Settings > API)
   const SUPABASE_URL = "https://cfookempjpfkntfgqcjr.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmb29rZW1wanBma250ZmdxY2pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwOTA4MDMsImV4cCI6MjA5MjY2NjgwM30.A6piXUpxAQPTvHc-_ymXzzOeQg7sTaB3h3HwuNiVU20";
+
   const supabaseClient = (SUPABASE_URL.startsWith("http"))
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
@@ -371,4 +376,3 @@
 
 </body>
 </html>
-  
