@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blurt — The internet's daily moment</title>
+<meta name="description" content="Everyone gets the same question every day. Answer first. See everyone else.">
+
+<!-- English version of the landing page. Supabase credentials live in ../config.js (shared with the Spanish version). -->
+
+<link rel="canonical" href="https://blurt.today/en/">
+<link rel="alternate" hreflang="es" href="https://blurt.today/">
+<link rel="alternate" hreflang="en" href="https://blurt.today/en/">
+<link rel="alternate" hreflang="x-default" href="https://blurt.today/">
+
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="../images/favicon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --grad-start: #f0748f;
+    --grad-mid: #ec5a72;
+    --grad-end: #d6302e;
+    --white: #ffffff;
+    --pill-bg: rgba(255, 255, 255, 0.16);
+    --pill-border: rgba(255, 255, 255, 0.28);
+    /* SF Compact Rounded is an Apple system font with no licensed web build:
+       Safari/macOS/iOS visitors get the real thing via ui-rounded/-apple-system;
+       everyone else falls back to Baloo 2, a similarly rounded, web-licensed face. */
+    --font: ui-rounded, -apple-system, "SF Pro Rounded", "Baloo 2", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: linear-gradient(150deg, var(--grad-start) 0%, var(--grad-mid) 45%, var(--grad-end) 100%);
+    color: var(--white);
+    font-family: var(--font);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a { color: inherit; }
+
+  .page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(12px, 2vh, 28px) 24px clamp(10px, 1.5vh, 20px);
+    min-height: 0;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 0;
+  }
+
+  .logo {
+    height: clamp(22px, 3.2vh, 36px);
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  h1.headline {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: clamp(20px, 3.6vh, 44px);
+    line-height: 1.08;
+    max-width: 15ch;
+    margin: clamp(8px, 1.2vh, 16px) 0 0;
+    flex-shrink: 0;
+  }
+
+  .sub {
+    margin: clamp(6px, 1vh, 10px) 0 0;
+    font-size: clamp(12px, 1.5vh, 15px);
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 46ch;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Waitlist pill form ---------- */
+  .waitlist {
+    margin-top: clamp(8px, 1.4vh, 14px);
+    width: 100%;
+    max-width: 460px;
+    flex-shrink: 0;
+  }
+
+  .waitlist-form {
+    display: flex;
+    align-items: center;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    padding: 6px 6px 6px 22px;
+    backdrop-filter: blur(6px);
+  }
+
+  .waitlist-form input[type="email"] {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 8px;
+    outline: none;
+  }
+
+  .waitlist-form input[type="email"]::placeholder { color: rgba(255, 255, 255, 0.75); }
+
+  .btn {
+    background: var(--white);
+    color: #1a1015;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.1s ease, opacity 0.15s ease;
+  }
+
+  .btn:hover { opacity: 0.92; }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.65; cursor: default; }
+  .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+  .waitlist-form input[type="email"]:focus-visible {
+    outline: none;
+  }
+
+  .form-note {
+    margin: 10px 4px 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    min-height: 18px;
+    text-align: left;
+  }
+
+  .form-note.error { color: #ffe0dd; font-weight: 600; }
+  .form-note.success { color: #e4ffe9; font-weight: 600; }
+
+  .waitlist-success {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    padding: 14px 22px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .waitlist-success.show { display: flex; }
+  .waitlist-form.hide { display: none; }
+
+  /* ---------- Hero phones image ---------- */
+  .hero-visual {
+    margin-top: clamp(4px, 1vh, 8px);
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-phones {
+    width: auto;
+    height: auto;
+    max-width: min(960px, 94%);
+    max-height: 100%;
+    display: block;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.35));
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding-top: clamp(6px, 1vh, 14px);
+    flex-shrink: 0;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    font-size: 14px;
+  }
+
+  .footer-links a { text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+
+  .footer-copy {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    .waitlist-form {
+      flex-direction: column;
+      align-items: stretch;
+      border-radius: 22px;
+      padding: 14px;
+      gap: 10px;
+    }
+    .waitlist-form input[type="email"] { padding: 8px 6px; }
+    .btn { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; }
+  .lang-switch {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .lang-switch a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 999px;
+    opacity: 0.85;
+  }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch a[aria-current="true"] { background: #ffffff; color: #1a1015; opacity: 1; }
+  .lang-switch a:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+  .lang-switch.fixed {
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 16px;
+    z-index: 10;
+  }
+  /* ---------- App Store download (shown when APP_STORE_URL is set in config.js) ---------- */
+  .download {
+    margin-top: clamp(8px, 1.4vh, 14px);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(6px, 1vh, 10px);
+  }
+  .download[hidden] { display: none; }
+  .download-label {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .store-link { display: inline-block; line-height: 0; border-radius: 12px; }
+  .store-link img { height: 54px; width: auto; display: block; }
+  .store-link img[hidden] { display: none; }
+  .store-link:focus-visible { outline: 2px solid #ffffff; outline-offset: 4px; }
+  .store-fallback {
+    display: inline-block;
+    line-height: 1.2;
+    background: #ffffff;
+    color: #1a1015;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 16px 28px;
+    border-radius: 999px;
+  }
+  .store-fallback[hidden] { display: none; }
+</style>
+<script src="../config.js"></script>
+</head>
+<body>
+
+<nav class="lang-switch fixed" aria-label="Language">
+  <a href="../index.html" hreflang="es" lang="es" aria-label="Español">ES</a>
+  <a href="index.html" hreflang="en" lang="en" aria-current="true" aria-label="English">EN</a>
+</nav>
+
+<div class="page">
+  <section class="hero">
+    <a href="index.html" aria-label="Blurt — home" style="flex-shrink:0;">
+      <img class="logo" src="../images/logo.svg" alt="blurt">
+    </a>
+
+    <h1 class="headline">The internet's daily moment. 👀</h1>
+
+    <p class="sub">Everyone gets the same question every day. Answer first. See everyone else.</p>
+
+    <div class="waitlist">
+      <form class="waitlist-form" id="waitlistForm" novalidate>
+        <label for="email" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);">Email address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" autocomplete="email" required>
+        <button type="submit" class="btn" id="submitBtn">Join waitlist</button>
+      </form>
+      <div class="waitlist-success" id="waitlistSuccess">
+        <span>✓</span>
+        <span>You're in. We'll let you know when your access opens.</span>
+      </div>
+      <p class="form-note" id="formNote"></p>
+    </div>
+
+    <div class="download" id="download" hidden>
+      <p class="download-label">Download the app</p>
+      <a class="store-link" id="storeLink" href="#" rel="noopener">
+        <img src="../images/badges/app-store-en.svg" alt="Download on the App Store" height="54" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+        <span class="store-fallback" hidden>Download on the App Store</span>
+      </a>
+    </div>
+    <script>
+      // Pre-launch: waitlist. Once APP_STORE_URL is set in config.js: App Store download.
+      (function () {
+        var url = (window.BLURT_CONFIG || {}).APP_STORE_URL;
+        if (!url) return;
+        document.querySelector('.waitlist').hidden = true;
+        document.getElementById('storeLink').href = url;
+        document.getElementById('download').hidden = false;
+      })();
+    </script>
+
+    <div class="hero-visual">
+      <img
+        class="hero-phones"
+        src="../images/hero-phones-en.png"
+        alt="Two phones showing today's question in Blurt, with reactions, comments, and sharing"
+      >
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="support.html">Support</a>
+      <a href="community.html">Community</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="privacy-choices.html">Privacy choices</a>
+    </div>
+    <div class="footer-copy">© 2026 Blurt • all rights reserved</div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+  // ---- Supabase waitlist ----
+  const { SUPABASE_URL, SUPABASE_ANON_KEY } = window.BLURT_CONFIG || {};
+
+  const supabaseClient = (SUPABASE_URL && SUPABASE_URL.startsWith("http"))
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+  const form = document.getElementById('waitlistForm');
+  const emailInput = document.getElementById('email');
+  const submitBtn = document.getElementById('submitBtn');
+  const note = document.getElementById('formNote');
+  const successBox = document.getElementById('waitlistSuccess');
+
+  function setNote(msg, kind) {
+    note.textContent = msg || '';
+    note.className = 'form-note' + (kind ? ' ' + kind : '');
+  }
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+
+    if (!isValidEmail(email)) {
+      setNote('Enter a valid email address.', 'error');
+      emailInput.focus();
+      return;
+    }
+
+    if (!supabaseClient) {
+      setNote('Supabase is not configured (SUPABASE_URL / SUPABASE_ANON_KEY in config.js).', 'error');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    setNote('');
+
+    try {
+      const { error } = await supabaseClient.from('waitlist').insert({ email: email });
+
+      if (error) {
+        if (error.code === '23505') {
+          setNote('That email is already on the list.', 'success');
+        } else {
+          console.error(error);
+          setNote('Something went wrong. Please try again in a moment.', 'error');
+        }
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Join waitlist';
+        return;
+      }
+
+      form.classList.add('hide');
+      successBox.classList.add('show');
+      setNote('');
+    } catch (err) {
+      console.error(err);
+      setNote('Something went wrong. Please try again in a moment.', 'error');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Join waitlist';
+    }
+  });
+</script>
+
+</body>
+</html>
