@@ -13,9 +13,8 @@
   1) Corre el SQL de waitlist-setup.sql en tu SQL editor de Supabase
      (crea la tabla + política RLS de insert-only para el anon key).
 
-  2) Reemplaza estas dos constantes en el <script> al final del archivo:
-       const SUPABASE_URL = "TU_SUPABASE_URL_AQUI";
-       const SUPABASE_ANON_KEY = "TU_SUPABASE_ANON_KEY_AQUI";
+  2) Pega tu SUPABASE_URL y SUPABASE_ANON_KEY en config.js
+     (un solo archivo, lo usan la versión en español y la de inglés).
 
   3) Deploy a Vercel:
        - Sube esta carpeta completa (index.html + /images) a un repo de GitHub
@@ -24,6 +23,11 @@
        No hace falta vercel.json: es un sitio estático simple.
   ============================================================
 -->
+
+<link rel="canonical" href="https://blurt.today/">
+<link rel="alternate" hreflang="es" href="https://blurt.today/">
+<link rel="alternate" hreflang="en" href="https://blurt.today/en/">
+<link rel="alternate" hreflang="x-default" href="https://blurt.today/">
 
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" href="images/favicon.png" sizes="192x192">
@@ -254,9 +258,74 @@
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; scroll-behavior: auto !important; }
   }
+  .top-right { display: flex; align-items: center; gap: 16px; }
+  .lang-switch {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .lang-switch a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 999px;
+    opacity: 0.85;
+  }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch a[aria-current="true"] { background: #ffffff; color: #1a1015; opacity: 1; }
+  .lang-switch a:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+  .lang-switch.fixed {
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 16px;
+    z-index: 10;
+  }
+  /* ---------- App Store download (shown when APP_STORE_URL is set in config.js) ---------- */
+  .download {
+    margin-top: clamp(8px, 1.4vh, 14px);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(6px, 1vh, 10px);
+  }
+  .download[hidden] { display: none; }
+  .download-label {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .store-link { display: inline-block; line-height: 0; border-radius: 12px; }
+  .store-link img { height: 54px; width: auto; display: block; }
+  .store-link img[hidden] { display: none; }
+  .store-link:focus-visible { outline: 2px solid #ffffff; outline-offset: 4px; }
+  .store-fallback {
+    display: inline-block;
+    line-height: 1.2;
+    background: #ffffff;
+    color: #1a1015;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 16px 28px;
+    border-radius: 999px;
+  }
+  .store-fallback[hidden] { display: none; }
 </style>
+<script src="config.js"></script>
 </head>
 <body>
+
+<nav class="lang-switch fixed" aria-label="Idioma">
+  <a href="index.html" hreflang="es" lang="es" aria-current="true" aria-label="Español">ES</a>
+  <a href="en/index.html" hreflang="en" lang="en" aria-label="English">EN</a>
+</nav>
 
 <div class="page">
   <section class="hero">
@@ -280,6 +349,24 @@
       </div>
       <p class="form-note" id="formNote"></p>
     </div>
+
+    <div class="download" id="download" hidden>
+      <p class="download-label">Descarga la app</p>
+      <a class="store-link" id="storeLink" href="#" rel="noopener">
+        <img src="images/badges/app-store-es.svg" alt="Descargar en el App Store" height="54" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+        <span class="store-fallback" hidden>Descargar en el App Store</span>
+      </a>
+    </div>
+    <script>
+      // Pre-launch: waitlist. Once APP_STORE_URL is set in config.js: App Store download.
+      (function () {
+        var url = (window.BLURT_CONFIG || {}).APP_STORE_URL;
+        if (!url) return;
+        document.querySelector('.waitlist').hidden = true;
+        document.getElementById('storeLink').href = url;
+        document.getElementById('download').hidden = false;
+      })();
+    </script>
 
     <div class="hero-visual">
       <img
@@ -305,11 +392,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
   // ---- Supabase waitlist ----
-  // TODO: reemplaza con tus valores reales de Supabase (Project Settings > API)
-  const SUPABASE_URL = "https://cfookempjpfkntfgqcjr.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmb29rZW1wanBma250ZmdxY2pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwOTA4MDMsImV4cCI6MjA5MjY2NjgwM30.A6piXUpxAQPTvHc-_ymXzzOeQg7sTaB3h3HwuNiVU20";
+  // Las credenciales viven en config.js (compartido por español e inglés)
+  const { SUPABASE_URL, SUPABASE_ANON_KEY } = window.BLURT_CONFIG || {};
 
-  const supabaseClient = (SUPABASE_URL.startsWith("http"))
+  const supabaseClient = (SUPABASE_URL && SUPABASE_URL.startsWith("http"))
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
