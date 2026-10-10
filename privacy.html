@@ -142,6 +142,24 @@
   }
 
   strong { font-weight: 700; }
+  .site-footer {
+    margin-top: 28px;
+    text-align: center;
+  }
+  .site-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
+    font-size: 14px;
+  }
+  .site-footer-links a { color: var(--white); text-decoration: none; opacity: 0.92; }
+  .site-footer-links a:hover { text-decoration: underline; opacity: 1; }
+  .site-footer-copy {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
 </style>
 </head>
 <body>
@@ -193,7 +211,7 @@
     <p>Cuando publicas una respuesta anónima, otros usuarios no ven tu identidad. Internamente, Blurt sí asocia esa respuesta con tu cuenta, para poder moderar contenido, investigar reportes de abuso y cumplir obligaciones legales.</p>
 
     <h2>6. Cuánto tiempo guardamos tus datos</h2>
-    <p>Guardamos tus datos mientras tu cuenta esté activa. Puedes pedir la eliminación de tu cuenta y tus datos escribiendo a <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>; podemos conservar cierta información cuando la ley lo requiera (por ejemplo, registros de moderación de seguridad).</p>
+    <p>Guardamos tus datos mientras tu cuenta esté activa. Puedes eliminar tu cuenta desde la app (Ajustes → Eliminar cuenta) y ver el resto de tus opciones en <a href="privacy-choices.html">Opciones de privacidad</a>. También puedes pedir la eliminación de tus datos escribiendo a <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>; podemos conservar cierta información cuando la ley lo requiera (por ejemplo, registros de moderación de seguridad).</p>
 
     <h2>7. Seguridad</h2>
     <p>Usamos controles de acceso a nivel de base de datos (Row Level Security en Supabase) y otras medidas razonables para proteger tu información. Ningún sistema es 100% seguro.</p>
@@ -208,6 +226,17 @@
     <p>Roberto Carlos Agreda Ramírez (persona natural)<br>
     <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a></p>
   </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-links">
+      <a href="support.html">Soporte</a>
+      <a href="community.html">Comunidad</a>
+      <a href="terms.html">Términos</a>
+      <a href="privacy.html">Privacidad</a>
+      <a href="privacy-choices.html">Opciones de privacidad</a>
+    </div>
+    <div class="site-footer-copy">© 2026 Blurt • todos los derechos reservados</div>
+  </footer>
 </div>
 
 </body>
