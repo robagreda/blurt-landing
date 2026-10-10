@@ -220,7 +220,8 @@
 
   .footer-links {
     display: flex;
-    gap: 22px;
+    flex-wrap: wrap;
+    gap: 6px 22px;
     font-size: 14px;
   }
 
@@ -287,9 +288,11 @@
 
   <footer>
     <div class="footer-links">
-      <a href="mailto:blurt.today@gmail.com">Contacto</a>
+      <a href="support.html">Soporte</a>
+      <a href="community.html">Comunidad</a>
       <a href="terms.html">Términos</a>
       <a href="privacy.html">Privacidad</a>
+      <a href="privacy-choices.html">Opciones de privacidad</a>
     </div>
     <div class="footer-copy">© 2026 Blurt • todos los derechos reservados</div>
   </footer>
@@ -301,7 +304,6 @@
   // TODO: reemplaza con tus valores reales de Supabase (Project Settings > API)
   const SUPABASE_URL = "https://cfookempjpfkntfgqcjr.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmb29rZW1wanBma250ZmdxY2pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwOTA4MDMsImV4cCI6MjA5MjY2NjgwM30.A6piXUpxAQPTvHc-_ymXzzOeQg7sTaB3h3HwuNiVU20";
-
   const supabaseClient = (SUPABASE_URL.startsWith("http"))
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
@@ -369,3 +371,4 @@
 
 </body>
 </html>
+  
