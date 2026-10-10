@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — blurt</title>
+
+<!--
+  ============================================================
+  BORRADOR LEGAL — no es asesoría legal.
+  Antes de publicar: que un abogado revise esto, en especial las
+  secciones sobre menores de edad y moderación. Operas como persona
+  natural (Roberto Carlos Agreda Ramírez) — si más adelante constituyes
+  una entidad legal, actualiza esos nombres aquí y en privacy.html.
+  ============================================================
+-->
+
+<link rel="canonical" href="https://blurt.today/en/terms.html">
+<link rel="alternate" hreflang="es" href="https://blurt.today/terms.html">
+<link rel="alternate" hreflang="en" href="https://blurt.today/en/terms.html">
+<link rel="alternate" hreflang="x-default" href="https://blurt.today/terms.html">
+
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="../images/favicon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --grad-start: #f0748f;
+    --grad-mid: #ec5a72;
+    --grad-end: #d6302e;
+    --white: #ffffff;
+    --ink: #241318;
+    --ink-dim: #5c4a4e;
+    --font-display: ui-rounded, -apple-system, "SF Pro Rounded", "Baloo 2", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(150deg, var(--grad-start) 0%, var(--grad-mid) 45%, var(--grad-end) 100%);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: #c23a52; }
+
+  .top {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-link { display: block; }
+  .logo-link img { height: 30px; width: auto; display: block; }
+
+  .back {
+    color: var(--white);
+    font-size: 14px;
+    text-decoration: none;
+    opacity: 0.9;
+  }
+  .back:hover { text-decoration: underline; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 24px 80px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px clamp(20px, 5vw, 56px);
+    box-shadow: 0 40px 80px -32px rgba(0, 0, 0, 0.35);
+  }
+
+  .draft-notice {
+    background: #fff3ea;
+    border: 1px solid #f3caa1;
+    color: #7a4a12;
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 32px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 34px);
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+
+  .updated {
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin: 0 0 32px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    margin: 36px 0 10px;
+    color: var(--ink);
+  }
+
+  p, li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 68ch;
+  }
+
+  ul { padding-left: 20px; margin: 10px 0; }
+  li { margin-bottom: 6px; }
+
+  .placeholder {
+    background: #ffe9d6;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  strong { font-weight: 700; }
+  .site-footer {
+    margin-top: 28px;
+    text-align: center;
+  }
+  .site-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
+    font-size: 14px;
+  }
+  .site-footer-links a { color: var(--white); text-decoration: none; opacity: 0.92; }
+  .site-footer-links a:hover { text-decoration: underline; opacity: 1; }
+  .site-footer-copy {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; }
+  .lang-switch {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .lang-switch a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 999px;
+    opacity: 0.85;
+  }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch a[aria-current="true"] { background: #ffffff; color: #1a1015; opacity: 1; }
+  .lang-switch a:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+  .lang-switch.fixed {
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 16px;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="logo-link" href="index.html" aria-label="Blurt — home">
+    <img src="../images/logo.svg" alt="blurt">
+  </a>
+  <div class="top-right">
+    <a class="back" href="index.html">← Back</a>
+    <nav class="lang-switch" aria-label="Language">
+      <a href="../terms.html" hreflang="es" lang="es" aria-label="Español">ES</a>
+      <a href="terms.html" hreflang="en" lang="en" aria-current="true" aria-label="English">EN</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <div class="draft-notice">
+      <strong>This is a draft.</strong> It is not legal advice. Before publishing it in production, have a lawyer review it — especially the sections on minors, anonymous content, and moderation. For now it assumes you operate as an individual (Roberto Carlos Agreda Ramírez); if you form a legal entity later, update the names in this document.
+    </div>
+
+    <h1>Terms of Service</h1>
+    <p class="updated">Last updated: September 18, 2026</p>
+
+    <h2>1. Acceptance of these terms</h2>
+    <p>By creating an account or using Blurt ("the app", "the service"), you accept these Terms of Service and our <a href="privacy.html">Privacy Policy</a>. If you do not agree, do not use the app.</p>
+
+    <h2>2. Who can use Blurt</h2>
+    <p>Blurt is not available to anyone under 13; we block sign-up for any user who states they are under 13. Users aged 13 to 17 get a version of the app with limited features: no anonymous replies and a pre-moderated discovery feed. These restrictions are applied using age signals from Apple and Google, in addition to the age the user declares at sign-up.</p>
+    <p>If you are the parent or guardian of a minor who uses Blurt, you can contact us at <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a> with questions about their account.</p>
+
+    <h2>3. Your account</h2>
+    <ul>
+      <li>You are responsible for keeping your account and sign-in method secure (Sign in with Apple or another method we offer).</li>
+      <li>The information you give us when you sign up must be truthful.</li>
+      <li>Each person may have only one account. Automated or fake accounts ("bots") are not allowed — see section 5.</li>
+    </ul>
+
+    <h2>4. How Blurt works</h2>
+    <p>Every day, Blurt sends the same question to all users. Your feed stays blurred until you answer the daily question (the "blur wall"). You can answer with a photo, video, or text. Reactions and up to 3 anonymous replies per week are part of the product — see section 7 for what "anonymous" means on Blurt.</p>
+
+    <h2>5. Prohibited conduct</h2>
+    <p>Among other things, the following is not allowed:</p>
+    <ul>
+      <li>Posting content that sexualizes, exploits, or endangers minors, under any circumstances.</li>
+      <li>Harassment, threats, hate speech, or incitement to violence.</li>
+      <li>Impersonating another person or creating fake accounts.</li>
+      <li>Using bots, scripts, or any automation to create accounts, generate answers, or manipulate reactions (our "zero-bots policy").</li>
+      <li>Illegal content, spam, or attempts to evade moderation or age filters.</li>
+    </ul>
+    <p>We use automated content checks (including hash matching against known child-exploitation databases) and report to the appropriate authorities (such as NCMEC) when the law requires it.</p>
+
+    <h2>6. Moderation and accounts</h2>
+    <p>Content rules are detailed in our <a href="community.html">Community Guidelines</a>. We may remove content, restrict features, or suspend or close accounts that violate these terms, without prior notice when the situation warrants it (for example, to protect minors). You can report content or accounts inside the app or by writing to us at <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>.</p>
+
+    <h2>7. About "anonymous" replies</h2>
+    <p>When you use an anonymous reply, your identity is not shown to other users. This does not mean anonymity from Blurt: internally we keep the link between your account and your activity so we can moderate content, prevent abuse, and meet legal obligations.</p>
+
+    <h2>8. Content you post</h2>
+    <p>You keep the rights to the content you post. By posting it on Blurt, you give us a license to display it inside the app to other users, according to the product's visibility rules (blur wall, feed, profile). We do not sell your content to third parties.</p>
+
+    <h2>9. Blurt's property</h2>
+    <p>The "Blurt" name, the logo, and the app's design are the property of Roberto Carlos Agreda Ramírez, operating as an individual until a legal entity is formed. You may not use them without written permission.</p>
+
+    <h2>10. No warranties</h2>
+    <p>Blurt is provided "as is." We do not guarantee that the service will be free of errors or interruptions.</p>
+
+    <h2>11. Limitation of liability</h2>
+    <p>To the maximum extent permitted by law, Roberto Carlos Agreda Ramírez will not be liable for indirect damages arising from the use of Blurt.</p>
+
+    <h2>12. Governing law</h2>
+    <p>These terms are governed by the laws of El Salvador. <span class="placeholder">[Assumed because that is where you operate and launch first — confirm with your lawyer, especially if you plan to have users in other Latin American countries.]</span></p>
+
+    <h2>13. Changes to these terms</h2>
+    <p>We may update these terms. If a change is significant, we will let you know inside the app or by email.</p>
+
+    <h2>14. Contact</h2>
+    <p>Questions about these terms? Write to us at <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-links">
+      <a href="support.html">Support</a>
+      <a href="community.html">Community</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="privacy-choices.html">Privacy choices</a>
+    </div>
+    <div class="site-footer-copy">© 2026 Blurt • all rights reserved</div>
+  </footer>
+</div>
+
+</body>
+</html>
