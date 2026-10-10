@@ -6,6 +6,11 @@
 <title>Opciones de privacidad — blurt</title>
 <meta name="description" content="Opciones de privacidad de Blurt: cómo acceder, exportar o eliminar tus datos y cómo desactivar lo que puedes desactivar.">
 
+<link rel="canonical" href="https://blurt.today/privacy-choices.html">
+<link rel="alternate" hreflang="es" href="https://blurt.today/privacy-choices.html">
+<link rel="alternate" hreflang="en" href="https://blurt.today/en/privacy-choices.html">
+<link rel="alternate" hreflang="x-default" href="https://blurt.today/privacy-choices.html">
+
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" href="images/favicon.png" sizes="192x192">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -140,6 +145,34 @@
     font-size: 13px;
     color: rgba(255, 255, 255, 0.75);
   }
+  .top-right { display: flex; align-items: center; gap: 16px; }
+  .lang-switch {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .lang-switch a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 999px;
+    opacity: 0.85;
+  }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch a[aria-current="true"] { background: #ffffff; color: #1a1015; opacity: 1; }
+  .lang-switch a:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+  .lang-switch.fixed {
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 16px;
+    z-index: 10;
+  }
 </style>
 </head>
 <body>
@@ -148,7 +181,13 @@
   <a class="logo-link" href="index.html" aria-label="Blurt — inicio">
     <img src="images/logo.svg" alt="blurt">
   </a>
-  <a class="back" href="index.html">← Volver</a>
+  <div class="top-right">
+    <a class="back" href="index.html">← Volver</a>
+    <nav class="lang-switch" aria-label="Idioma">
+      <a href="privacy-choices.html" hreflang="es" lang="es" aria-current="true" aria-label="Español">ES</a>
+      <a href="en/privacy-choices.html" hreflang="en" lang="en" aria-label="English">EN</a>
+    </nav>
+  </div>
 </div>
 
 <div class="wrap">
