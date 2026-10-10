@@ -127,6 +127,24 @@
   }
 
   strong { font-weight: 700; }
+  .site-footer {
+    margin-top: 28px;
+    text-align: center;
+  }
+  .site-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
+    font-size: 14px;
+  }
+  .site-footer-links a { color: var(--white); text-decoration: none; opacity: 0.92; }
+  .site-footer-links a:hover { text-decoration: underline; opacity: 1; }
+  .site-footer-copy {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
 </style>
 </head>
 <body>
@@ -176,7 +194,7 @@
     <p>Usamos verificación automatizada de contenido (incluyendo comparación de hash contra bases de datos conocidas de explotación infantil) y reportamos a las autoridades correspondientes (como NCMEC) cuando la ley lo requiere.</p>
 
     <h2>6. Moderación y cuentas</h2>
-    <p>Podemos remover contenido, restringir funciones o suspender/cerrar cuentas que violen estos términos, sin previo aviso cuando la situación lo amerite (por ejemplo, seguridad de menores). Puedes reportar contenido o cuentas dentro de la app o escribiéndonos a <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>.</p>
+    <p>Las reglas de contenido están detalladas en nuestras <a href="community.html">Guías de la comunidad</a>. Podemos remover contenido, restringir funciones o suspender/cerrar cuentas que violen estos términos, sin previo aviso cuando la situación lo amerite (por ejemplo, seguridad de menores). Puedes reportar contenido o cuentas dentro de la app o escribiéndonos a <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>.</p>
 
     <h2>7. Sobre las respuestas "anónimas"</h2>
     <p>Cuando usas una respuesta anónima, tu identidad no se muestra a otros usuarios. Esto no significa anonimato frente a Blurt: internamente mantenemos la asociación entre tu cuenta y tu actividad para poder moderar contenido, prevenir abuso y cumplir con obligaciones legales.</p>
@@ -202,6 +220,17 @@
     <h2>14. Contacto</h2>
     <p>¿Preguntas sobre estos términos? Escríbenos a <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>.</p>
   </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-links">
+      <a href="support.html">Soporte</a>
+      <a href="community.html">Comunidad</a>
+      <a href="terms.html">Términos</a>
+      <a href="privacy.html">Privacidad</a>
+      <a href="privacy-choices.html">Opciones de privacidad</a>
+    </div>
+    <div class="site-footer-copy">© 2026 Blurt • todos los derechos reservados</div>
+  </footer>
 </div>
 
 </body>
