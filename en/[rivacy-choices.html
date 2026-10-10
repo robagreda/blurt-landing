@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Choices — blurt</title>
+<meta name="description" content="Blurt privacy choices: how to access, export, or delete your data and turn off what you can turn off.">
+
+<link rel="canonical" href="https://blurt.today/en/privacy-choices.html">
+<link rel="alternate" hreflang="es" href="https://blurt.today/privacy-choices.html">
+<link rel="alternate" hreflang="en" href="https://blurt.today/en/privacy-choices.html">
+<link rel="alternate" hreflang="x-default" href="https://blurt.today/privacy-choices.html">
+
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="../images/favicon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --grad-start: #f0748f;
+    --grad-mid: #ec5a72;
+    --grad-end: #d6302e;
+    --white: #ffffff;
+    --ink: #241318;
+    --ink-dim: #5c4a4e;
+    --font-display: ui-rounded, -apple-system, "SF Pro Rounded", "Baloo 2", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(150deg, var(--grad-start) 0%, var(--grad-mid) 45%, var(--grad-end) 100%);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: #c23a52; }
+
+  .top {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-link { display: block; }
+  .logo-link img { height: 30px; width: auto; display: block; }
+
+  .back {
+    color: var(--white);
+    font-size: 14px;
+    text-decoration: none;
+    opacity: 0.9;
+  }
+  .back:hover { text-decoration: underline; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 24px 80px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px clamp(20px, 5vw, 56px);
+    box-shadow: 0 40px 80px -32px rgba(0, 0, 0, 0.35);
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: #c23a52;
+    margin: 0 0 6px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 34px);
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+
+  .lead {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-dim);
+    margin: 0 0 8px;
+    max-width: 56ch;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    margin: 36px 0 10px;
+    color: var(--ink);
+  }
+
+  p, li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 68ch;
+  }
+
+  ul { padding-left: 20px; margin: 10px 0; }
+  li { margin-bottom: 8px; }
+
+  .contact-box {
+    margin-top: 18px;
+    background: #fff3f5;
+    border: 1px solid #f6cfd6;
+    border-radius: 16px;
+    padding: 16px 20px;
+    font-size: 15px;
+  }
+
+  strong { font-weight: 700; }
+  .site-footer {
+    margin-top: 28px;
+    text-align: center;
+  }
+  .site-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
+    font-size: 14px;
+  }
+  .site-footer-links a { color: var(--white); text-decoration: none; opacity: 0.92; }
+  .site-footer-links a:hover { text-decoration: underline; opacity: 1; }
+  .site-footer-copy {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .top-right { display: flex; align-items: center; gap: 16px; }
+  .lang-switch {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .lang-switch a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 999px;
+    opacity: 0.85;
+  }
+  .lang-switch a:hover { opacity: 1; }
+  .lang-switch a[aria-current="true"] { background: #ffffff; color: #1a1015; opacity: 1; }
+  .lang-switch a:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+  .lang-switch.fixed {
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 16px;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="logo-link" href="index.html" aria-label="Blurt — home">
+    <img src="../images/logo.svg" alt="blurt">
+  </a>
+  <div class="top-right">
+    <a class="back" href="index.html">← Back</a>
+    <nav class="lang-switch" aria-label="Language">
+      <a href="../privacy-choices.html" hreflang="es" lang="es" aria-label="Español">ES</a>
+      <a href="privacy-choices.html" hreflang="en" lang="en" aria-current="true" aria-label="English">EN</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <p class="eyebrow">Your data, your call</p>
+    <h1>Privacy Choices</h1>
+    <p class="lead">Here is how to access, export, or delete your data in Blurt, and how to turn off the things you can turn off.</p>
+
+    <h2>Delete your account</h2>
+    <p>In the app, open Settings → Delete Account and confirm. This marks your profile as deleted in our systems, erases locally stored app data on your device, and signs you out. You can also delete the app itself at any time, which removes all local data immediately.</p>
+
+    <h2>Request access, correction, or export</h2>
+    <p>Email <a href="mailto:blurt.today@gmail.com?subject=Blurt%20data%20request">blurt.today@gmail.com</a> with the subject "Blurt data request" and include your display name and the Apple ID you use with Blurt. We will verify the request against your account before responding, and fulfill verified requests within the timeframes required by applicable law.</p>
+
+    <h2>Opt out of analytics</h2>
+    <p>Blurt uses pseudonymous product analytics (PostHog) to understand feature usage. Analytics is not used for advertising and is never sold. To opt out, email us at the address above and we will stop processing analytics events for your account.</p>
+
+    <h2>Turn off notifications</h2>
+    <p>The daily-question reminder can be turned off or rescheduled in the app's Settings → Notifications. You can also disable Blurt notifications entirely in iOS Settings → Notifications → Blurt.</p>
+
+    <h2>Revoke device permissions</h2>
+    <p>Camera, microphone, and photo-library permissions are requested only when used and can be revoked at any time in iOS Settings → Privacy &amp; Security. The core question feed works without them; recording an answer needs the camera and microphone.</p>
+
+    <h2>Contact</h2>
+    <p>For any privacy choice not covered here, email <a href="mailto:blurt.today@gmail.com">blurt.today@gmail.com</a>.</p>
+
+    <h2>More information</h2>
+    <p>See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-links">
+      <a href="support.html">Support</a>
+      <a href="community.html">Community</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="privacy-choices.html">Privacy choices</a>
+    </div>
+    <div class="site-footer-copy">© 2026 Blurt • all rights reserved</div>
+  </footer>
+</div>
+
+</body>
+</html>
